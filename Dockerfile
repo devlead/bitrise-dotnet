@@ -27,6 +27,13 @@ RUN mkdir dotnettest \
     && cd .. \
     && rm -r dotnettest
 
+# Prime Cake
+ADD cakeprimer cakeprimer
+RUN cd cakeprimer \
+    && dotnet restore Cake.sln \
+    && cd .. \
+    && rm -rf cakeprimer
+
 # Cake
 ENV CAKE_VERSION 0.19.5
 RUN mkdir -p /opt/Cake/Cake \

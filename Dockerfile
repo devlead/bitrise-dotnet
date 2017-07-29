@@ -17,6 +17,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
 RUN mkdir -p /opt/nuget \
     && curl -Lsfo /opt/nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 
+ENV PATH "$PATH:/opt/nuget"
+
 # Prime dotnet
 RUN mkdir dotnettest \
     && cd dotnettest \

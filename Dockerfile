@@ -6,7 +6,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list' \
     && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893 \
     && apt-get update \
-    && apt-get install -y dotnet-dev-1.1.7 unzip
+    && apt-get install -y dotnet-sdk-2.1.4 unzip
 
 # Install mono
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
@@ -45,7 +45,7 @@ RUN cd cakeprimer \
 
 # Cake
 ENV CAKE_NUGET_USEINPROCESSCLIENT true
-ENV CAKE_VERSION 0.24.0
+ENV CAKE_VERSION 0.25.0
 RUN mkdir -p /opt/Cake/Cake \
     && curl -Lsfo Cake.zip "https://www.myget.org/F/cake/api/v2/package/Cake/$CAKE_VERSION" \
     && unzip -q Cake.zip -d "/opt/Cake/Cake" \

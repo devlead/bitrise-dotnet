@@ -32,16 +32,12 @@ ADD cakeprimer cakeprimer
 RUN cd integrationtestprimer \
     && dotnet restore hwapp.sln \
     --source "https://www.myget.org/F/xunit/api/v3/index.json" \
-    --source "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" \
-    --source "https://dotnet.myget.org/F/cli-deps/api/v3/index.json" \
     --source "https://api.nuget.org/v3/index.json" \
     && cd .. \
     && rm -rf integrationtestprimer \
     && cd cakeprimer \
     && dotnet restore Cake.sln \
     --source "https://www.myget.org/F/xunit/api/v3/index.json" \
-    --source "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" \
-    --source "https://dotnet.myget.org/F/cli-deps/api/v3/index.json" \
     --source "https://api.nuget.org/v3/index.json" \
     && cd .. \
     && rm -rf cakeprimer

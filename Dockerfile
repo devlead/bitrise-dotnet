@@ -3,12 +3,12 @@ FROM bitriseio/docker-bitrise-base:latest
 # Install .NET Core & mono & nuget
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
     && echo "deb http://download.mono-project.com/repo/debian wheezy/snapshots/5.4.1 main" > /etc/apt/sources.list.d/mono-xamarin.list \
-	&& curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
-    && sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg \
-    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list' \
-    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893 \
+    && wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb \
+    && sudo dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
-	&& apt-get install -y --no-install-recommends dotnet-sdk-2.1.300-preview1-008174 unzip mono-devel \
+    && apt-get install apt-transport-https \
+    && apt-get update \
+	&& apt-get install -y --no-install-recommends dotnet-sdk-2.1 unzip mono-devel \
 	&& rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && mkdir -p /opt/nuget \
@@ -31,19 +31,17 @@ ADD integrationtestprimer integrationtestprimer
 ADD cakeprimer cakeprimer
 RUN cd integrationtestprimer \
     && dotnet restore hwapp.sln \
-    --source "https://www.myget.org/F/xunit/api/v3/index.json" \
     --source "https://api.nuget.org/v3/index.json" \
     && cd .. \
     && rm -rf integrationtestprimer \
     && cd cakeprimer \
     && dotnet restore Cake.sln \
-    --source "https://www.myget.org/F/xunit/api/v3/index.json" \
     --source "https://api.nuget.org/v3/index.json" \
     && cd .. \
     && rm -rf cakeprimer
 
 # Get & Test Cake
-ENV CAKE_VERSION 0.26.0
+ENV CAKE_VERSION 0.28.0
 ENV CAKE_SETTINGS_SKIPVERIFICATION true
 ADD cake /usr/bin/cake
 RUN mkdir -p /opt/Cake/Cake \

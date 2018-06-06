@@ -8,6 +8,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     && apt-get update \
     && apt-get install apt-transport-https \
     && apt-get update \
+    && apt-get install -y --no-install-recommends dotnet-sdk-2.1.4 \
+    && apt-get install -y --no-install-recommends dotnet-sdk-2.1.101 \
 	&& apt-get install -y --no-install-recommends dotnet-sdk-2.1 unzip mono-devel \
 	&& rm -rf /var/lib/apt/lists/* \
     && apt-get clean \

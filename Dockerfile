@@ -8,9 +8,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     && apt-get update \
     && apt-get install apt-transport-https \
     && apt-get update \
-    && apt-get install -y --no-install-recommends dotnet-sdk-2.1.4 \
-    && apt-get install -y --no-install-recommends dotnet-sdk-2.1.101 \
-	&& apt-get install -y --no-install-recommends dotnet-sdk-2.1 unzip mono-devel \
+    && apt-get install -y --no-install-recommends dotnet-sdk-2.1.400 \
+	&& apt-get install -y --no-install-recommends unzip mono-devel \
 	&& rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && mkdir -p /opt/nuget \
@@ -43,7 +42,7 @@ RUN cd integrationtestprimer \
     && rm -rf cakeprimer
 
 # Get & Test Cake
-ENV CAKE_VERSION 0.28.0
+ENV CAKE_VERSION 0.29.0
 ENV CAKE_SETTINGS_SKIPVERIFICATION true
 ADD cake /usr/bin/cake
 RUN mkdir -p /opt/Cake/Cake \

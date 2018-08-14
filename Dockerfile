@@ -6,9 +6,9 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     && wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb \
     && sudo dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
-    && apt-get install apt-transport-https \
+    && apt-get install -y apt-transport-https dos2unix \
     && apt-get update \
-    && apt-get install -y --no-install-recommends dotnet-sdk-2.1.400 \
+    && apt-get install -y --no-install-recommends dotnet-sdk-2.1 \
 	&& apt-get install -y --no-install-recommends unzip mono-devel \
 	&& rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
@@ -45,7 +45,8 @@ RUN cd integrationtestprimer \
 ENV CAKE_VERSION 0.29.0
 ENV CAKE_SETTINGS_SKIPVERIFICATION true
 ADD cake /usr/bin/cake
-RUN mkdir -p /opt/Cake/Cake \
+RUN dos2unix -q /usr/bin/cake \
+    && mkdir -p /opt/Cake/Cake \
     && curl -Lsfo Cake.zip "https://www.nuget.org/api/v2/package/Cake/$CAKE_VERSION" \
     && unzip -q Cake.zip -d "/opt/Cake/Cake" \
     && rm -f Cake.zip \

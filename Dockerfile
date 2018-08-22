@@ -42,7 +42,7 @@ RUN cd integrationtestprimer \
     && rm -rf cakeprimer
 
 # Get & Test Cake
-ENV CAKE_VERSION 0.29.0
+ENV CAKE_VERSION 0.30.0
 ENV CAKE_SETTINGS_SKIPVERIFICATION true
 ADD cake /usr/bin/cake
 RUN dos2unix -q /usr/bin/cake \

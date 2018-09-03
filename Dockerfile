@@ -6,9 +6,9 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     && wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb \
     && sudo dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
-    && apt-get install -y apt-transport-https dos2unix \
+    && apt-get install -y apt-transport-https dos2unix libcurl4-openssl-dev libunwind8 \
     && apt-get update \
-    && apt-get install -y --no-install-recommends dotnet-sdk-2.1 \
+    && apt-get install -y --no-install-recommends dotnet-sdk-2.1  \
 	&& apt-get install -y --no-install-recommends unzip mono-devel \
 	&& rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
